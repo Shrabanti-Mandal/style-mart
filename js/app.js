@@ -1,8 +1,10 @@
 const loadProducts = () => {
-  const url = `https://fakestoreapi.com/products`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => showProducts(data));
+  //const url = 'https://fakestoreapi.com/products';
+  fetch('../data.json')
+ .then((response) => response.json())
+ //.then((data) => console.log(data));
+.then((data) => showProducts(data));
+    
 };
 loadProducts();
 
@@ -15,7 +17,7 @@ const showProducts = (products) => {
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
       <div>
-    <img class="product-image" src=${image}></img>
+    <img class="product-image" src=${product.image}></img>
       </div>
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
@@ -33,6 +35,7 @@ const addToCart = (id, price) => {
 
   updateTaxAndCharge();
   document.getElementById("total-Products").innerText = count;
+  updateTotal();
 };
 
 const getInputValue = (id) => {
@@ -76,5 +79,6 @@ const updateTotal = () => {
   const grandTotal =
     getInputValue("price") + getInputValue("delivery-charge") +
     getInputValue("total-tax");
+   
   document.getElementById("total").innerText = grandTotal;
 };
